@@ -1,0 +1,104 @@
+﻿@model James_Thew.context.User_recepie
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<style>
+    /* Style for the details container */
+    .details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the headings (Title, Description, Date Posted) */
+    dt {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    /* Style for the displayed data */
+    dd {
+        margin-bottom: 10px;
+    }
+
+    /* Style for action links */
+    .action-links {
+        margin-top: 20px;
+    }
+
+    /* Style for the Back to List link */
+    .back-link {
+        font-size: 16px;
+    }
+</style>
+
+<div>
+    <div class="details-container">
+        <h2>Details</h2>
+        <div>
+            <h4>See User Recepies</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Ingrdient)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Ingrdient)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CookingProcedure)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CookingProcedure)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IsActive)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Post)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Post)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.AspNetUsers.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.AspNetUsers.Name)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+
+            @Html.ActionLink("Back to List", "viewContest", "Contest", null, new { @class = "btn btn-light btn-sm" })
+
+        </p>
+</div>

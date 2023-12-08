@@ -1,0 +1,116 @@
+﻿@model James_Thew.context.Racipies_james
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Delete";
+}
+
+<style>
+    .delete-container {
+        background-color: #f8f8f8;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #333;
+    }
+
+    h3 {
+        font-size: 18px;
+        color: #555;
+    }
+
+    dl.dl-horizontal {
+        font-size: 16px;
+        color: #444;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    .form-actions {
+        margin-top: 20px;
+    }
+
+    .btn-default {
+        background-color: #d9534f;
+        color: #fff;
+        border: none;
+    }
+
+        .btn-default:hover {
+            background-color: #c9302c;
+        }
+
+    .back-link {
+        color: #428bca;
+    }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    img {
+        max-width: 70px;
+        max-height: 70px;
+    }
+</style>
+
+<div class="delete-container">
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+
+    <div>
+        
+        <hr />
+        <dl class="dl-horizontal">
+          
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingredient)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingredient)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CookingProcedure)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CookingProcedure)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsFree)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsFree)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd>
+                <img src="@Url.Content(Model.Image)" alt="" />
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "back-link" })
+            </div>
+        }
+    </div>
+</div>

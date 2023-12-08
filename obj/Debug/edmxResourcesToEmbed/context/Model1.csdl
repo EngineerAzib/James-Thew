@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Subscription" Relationship="Self.FK_Subscription_AspNetUsers" FromRole="AspNetUsers" ToRole="Subscription" />
+    <NavigationProperty Name="Feedback" Relationship="Model.FK_Feedback_AspNetUsers" FromRole="AspNetUsers" ToRole="Feedback" />
+    <NavigationProperty Name="User_recepie" Relationship="Model.FK_User_recepie_AspNetUsers" FromRole="AspNetUsers" ToRole="User_recepie" />
+    <NavigationProperty Name="winnerstable" Relationship="Model.FK_winnerstable_AspNetUsers" FromRole="AspNetUsers" ToRole="winnerstable" />
+    <NavigationProperty Name="Profile_Image" Relationship="Model.FK_Profile_Image_AspNetUsers" FromRole="AspNetUsers" ToRole="Profile_Image" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SubscriptionType" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="SubscriptionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SubscriptionStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Subscription_AspNetUsers" FromRole="Subscription" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_Subscription_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscription">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="James_ThewEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+    <EntitySet Name="Subscription" EntityType="Self.Subscription" />
+    <AssociationSet Name="FK_Subscription_AspNetUsers" Association="Self.FK_Subscription_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Subscription" EntitySet="Subscription" />
+    </AssociationSet>
+    <EntitySet Name="Racipies_james" EntityType="Model.Racipies_james" />
+    <EntitySet Name="Anouncement" EntityType="Model.Anouncement" />
+    <EntitySet Name="Feedback" EntityType="Model.Feedback" />
+    <AssociationSet Name="FK_Feedback_AspNetUsers" Association="Model.FK_Feedback_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <EntitySet Name="FAQs" EntityType="Model.FAQs" />
+    <EntitySet Name="User_recepie" EntityType="Model.User_recepie" />
+    <AssociationSet Name="FK_User_recepie_AspNetUsers" Association="Model.FK_User_recepie_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_recepie" EntitySet="User_recepie" />
+    </AssociationSet>
+    <EntitySet Name="winnerstable" EntityType="Model.winnerstable" />
+    <AssociationSet Name="FK_winnerstable_AspNetUsers" Association="Model.FK_winnerstable_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="winnerstable" EntitySet="winnerstable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_winnerstable_User_recepie" Association="Model.FK_winnerstable_User_recepie">
+      <End Role="User_recepie" EntitySet="User_recepie" />
+      <End Role="winnerstable" EntitySet="winnerstable" />
+    </AssociationSet>
+    <EntitySet Name="Tips" EntityType="Model.Tips" />
+    <EntitySet Name="Profile_Image" EntityType="Model.Profile_Image" />
+    <AssociationSet Name="FK_Profile_Image_AspNetUsers" Association="Model.FK_Profile_Image_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Profile_Image" EntitySet="Profile_Image" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Racipies_james">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Ingredient" Type="String" Nullable="false" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="CookingProcedure" Type="String" Nullable="false" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="IsFree" Type="Boolean" Nullable="false" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Anouncement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="Date_Posted" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DatePosted" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Contents" Type="String" Nullable="false" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <Property Name="Rating" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Feedback_AspNetUsers" FromRole="Feedback" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_Feedback_AspNetUsers">
+    <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="Model.Feedback" Role="Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FAQs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Question" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Answer" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User_recepie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Ingrdient" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CookingProcedure" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Post" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_User_recepie_AspNetUsers" FromRole="User_recepie" ToRole="AspNetUsers" />
+    <NavigationProperty Name="winnerstable" Relationship="Model.FK_winnerstable_User_recepie" FromRole="User_recepie" ToRole="winnerstable" />
+  </EntityType>
+  <Association Name="FK_User_recepie_AspNetUsers">
+    <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="Model.User_recepie" Role="User_recepie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_recepie">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="winnerstable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_rec_id" Type="Int32" Nullable="false" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_winnerstable_AspNetUsers" FromRole="winnerstable" ToRole="AspNetUsers" />
+    <NavigationProperty Name="User_recepie" Relationship="Model.FK_winnerstable_User_recepie" FromRole="winnerstable" ToRole="User_recepie" />
+  </EntityType>
+  <Association Name="FK_winnerstable_AspNetUsers">
+    <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="Model.winnerstable" Role="winnerstable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="winnerstable">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_winnerstable_User_recepie">
+    <End Type="Model.User_recepie" Role="User_recepie" Multiplicity="1" />
+    <End Type="Model.winnerstable" Role="winnerstable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_recepie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="winnerstable">
+        <PropertyRef Name="User_rec_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Tips">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tips1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Profile_Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User_Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Model.FK_Profile_Image_AspNetUsers" FromRole="Profile_Image" ToRole="AspNetUsers" />
+  </EntityType>
+  <Association Name="FK_Profile_Image_AspNetUsers">
+    <End Type="Model.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="Model.Profile_Image" Role="Profile_Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Profile_Image">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,456 @@
+﻿@model  MyViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    /* Custom CSS styles */
+    .accordion-button {
+        cursor: pointer;
+        font-weight: bold;
+        position: relative;
+        padding-right: 30px;
+        background-color: #222831; /* Background color */
+        color: #ffffff; /* Text color */
+        border: none;
+    }
+
+        .accordion-button::before {
+            content: "+";
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .accordion-button.collapsed::before {
+            content: "-";
+        }
+
+    .card {
+        margin-bottom: 20px;
+    }
+
+    .accordion-button:hover {
+        color: white;
+        text-decoration: none;
+    }
+
+    .faq-card {
+        background-color: #222831; /* Background color */
+        border: 1px solid #222831;
+        border-radius: 10px;
+    }
+
+        .faq-card .card-header {
+            background-color: #222831; /* Background color */
+            color: #ffffff; /* Text color */
+        }
+
+        .faq-card .card-body {
+            padding: 15px;
+            color: #ffffff;
+        }
+    /* Text color */
+    /* Style for the alert background */
+    .alert-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Ensure it's above other content */
+    }
+
+    /* Style for the alert box */
+    .alert-box {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+</style>
+<div class="container mt-5">
+    @if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+    {
+        <div class="alert-bg">
+            <div class="alert-box">
+                <!-- JavaScript function to display the alert -->
+                <script>
+                    function showAlert() {
+                        alert("@TempData["ErrorMessage"]");
+                    }
+
+                    // Call the showAlert function when the page loads
+                    window.onload = showAlert;
+                </script>
+            </div>
+        </div>
+    }
+</div>
+
+
+<section class="offer_section layout_padding-bottom" id="subscription">
+    <div class="offer_container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="images/o1.jpg" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+
+                                Paid Recipes
+                            </h5>
+                            <h6>
+                                <span>$10</span>Monthly
+                            </h6>
+                            @using (Html.BeginForm("Subscription", "Home", FormMethod.Post, new { id = "subscriptionForm" }))
+                            {
+                                @Html.AntiForgeryToken()<input type="hidden" name="subscriptionType" value="Monthly">
+                                <div class="alert alert-warning">
+                                    <strong>Subscribe!</strong> @TempData["Sub"]
+                                </div>
+                                <button type="submit" class="btn btn-warning" id="subscribeButton">
+                                    Subscribe Now
+                                </button>
+                                <!--<div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">-->
+                                <!-- Modal Header -->
+                                <!--<div class="modal-header">
+                                    <h4 class="modal-title">Modal Heading</h4>
+                                    <button type="button" class="btn btn-danger btn-close" data-bs-dismiss="modal">Close</button>
+                                </div>-->
+                                <!-- Modal body -->
+                                <!--<div class="modal-body">
+
+
+
+                                </div>-->
+
+                                <!-- Modal footer -->
+                                <!--<div class="modal-footer">
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                                @*<script>
+                                        document.addEventListener('DOMContentLoaded', function () {
+                                            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+
+                                            document.getElementById('subscriptionForm').addEventListener('submit', function (e) {
+                                                e.preventDefault(); // Prevent the default form submission
+
+                                                // Simulate form submission
+                                                // Replace this with actual form submission code
+                                                // For demonstration purposes, we'll show the modal after a delay
+                                                setTimeout(function () {
+                                                    // Display the modal
+                                                    myModal.show();
+
+                                                    // Set the modal body content with the message
+
+                                                }, 1); // Delay of 1 second (adjust as needed)
+                                            });
+
+                                            // Close the modal when the close button is clicked
+                                            var closeButton = document.querySelector('.btn-close');
+                                            closeButton.addEventListener('click', function () {
+                                                myModal.hide();
+                                            });
+                                        });
+                                    </script>*@
+
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box">
+                        <div class="img-box">
+                            <img src="images/o2.jpg" alt="">
+                        </div>
+                        <div class="detail-box">
+                            <h5>
+                                Paid Recipes
+                            </h5>
+                            <h6>
+                                <span>$100</span> Annualy
+                            </h6>
+                            @using (Html.BeginForm("Subscription", "Home", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="subscriptionType" value="Yearly">
+                                <div class="alert alert-warning">
+                                    <strong>Subscribe!</strong> @TempData["Sub"]
+                                </div>
+                                <button type="submit" class="btn btn-warning text-bg-">
+                                    Subscribe Now
+                                </button>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- end offer section -->
+<!-- food section -->
+
+<section class="food_section layout_padding-bottom">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Our Recipes
+            </h2>
+        </div>
+
+        <ul class="filters_menu">
+            <li class="active" data-filter="*">All Recipes</li>
+            <li data-filter=".free">Free Recipe</li>
+            <li data-filter=".paid">Paid Recipe</li>
+        </ul>
+
+        <form class="d-flex">
+            <input class="form-control me-2" type="text" id="searchInput" placeholder="Search">
+            <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+        </form>
+
+        <!-- Filters and Search Results -->
+        <div class="filters-content">
+            <div class="row grid">
+                @foreach (var recipe in Model.Recipes)
+                {
+                    <div class="col-sm-6 col-lg-4 all @(recipe.IsFree ? "free" : "paid")">
+                        <div class="box">
+                            <div>
+                                <div class="img-box">
+                                    <img src="@Url.Content(recipe.Image)" alt="">
+                                </div>
+                                <div class="detail-box">
+                                    <h5>@recipe.Title</h5>
+                                    <p>James is an exceptional cook, mastering the art of culinary delights with flair. If you want to see his culinary magic, just click on the 'view' button!</p>
+
+                                    @if (recipe.IsFree)
+                                    {
+                                        <!-- Free recipe details -->
+                                        <a href="@Url.Action("Details_Recp", "Home", new { id = recipe.Id })" class="text-white btn btn-outline-warning" style="border-radius: 50px;"><h6>View Recipe</h6></a>
+                                    }
+                                    else if (Model.HasActiveSubscription)
+                                    {
+                                        <!-- Paid recipe details for users with active subscriptions -->
+                                        <a href="@Url.Action("Details_Recp", "Home", new { id = recipe.Id })" class="text-white btn btn-outline-warning" style="border-radius: 50px;"><h6>View Recipe</h6></a>
+                                    }
+                                    else
+                                    {
+                                        <!-- Prompt to subscribe for paid recipes -->
+                                        <a href="#subscription" class="text-white btn btn-outline-warning" style="border-radius: 50px;"><h6>Subscribe to View</h6></a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- end food section -->
+<!-- about section -->
+
+<section class="client_section layout_padding-bottom">
+    <div class="container mt-3">
+        <div class="heading_container heading_center psudo_white_primary mb_45">
+            <h2>
+                Announcement
+            </h2>
+        </div>
+
+        <div class="carousel-wrap row">
+            <div class="col-12">
+                <div class="owl-carousel client_owl-carousel">
+                    @foreach (var item in Model.Announcements)
+                    {
+                        <div class="item">
+                            <div class="box">
+                                <div class="detail-box">
+                                    <h1>Announcement</h1>
+                                    <h6>@item.Title</h6>
+                                    <p>@item.Description</p>
+                                    <p>@item.Date_Posted</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- end about section -->
+<!-- book section -->
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"> <i class="btn-close">close</i></button>
+                <strong>Success!</strong> @TempData["Subs"]
+            </div>
+            <h2>
+                Feedback
+            </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    @using (Html.BeginForm("Feedback", "Feedback", FormMethod.Post))
+                    {
+                        <div>
+                            <textarea name="Contents" class="form-control" placeholder="Give Your Valuable Feedback" required></textarea>
+                        </div>
+
+                        <div>
+                            <select class="form-control nice-select wide" required name="Rating">
+                                <option value="" disabled selected>
+                                    Rating
+                                </option>
+                                <option value="0">No Rating</option>
+                                <option value="2">2</option>
+                                <option value="5">5</option>
+                                <option value="8">8</option>
+                                <option value="10">10</option>
+                            </select>
+                        </div>
+
+                        <div class="btn_box">
+                            <button type="submit">
+                                Feedback Now
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-6">
+                <!--<div class="map_container ">
+                  <div id="googleMap"></div>
+                </div>-->
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- end book section -->
+<!-- client section -->
+<div class="container mt-3">
+    <h1 class="mb-5 text-center">Frequently Asked Questions</h1>
+    <div class="row">
+        @foreach (var faqs in Model.FAQs)
+        {
+            <div class="col-6">
+                <div class="card faq-card">
+                    <div class="card-header" id="heading@(faqs.Id)">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link accordion-button" data-toggle="collapse" data-target="#collapse@(faqs.Id)" aria-expanded="false" aria-controls="collapse@(faqs.Id)">
+                                @faqs.Question
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="collapse@(faqs.Id)" class="collapse" aria-labelledby="heading@(faqs.Id)">
+                        <div class="card-body">
+                            @faqs.Answer
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<section class="client_section layout_padding-bottom">
+    <div class="container mt-3">
+        <div class="heading_container heading_center psudo_white_primary mb_45">
+            <h2>
+                Tips
+            </h2>
+        </div>
+
+        <div class="carousel-wrap row">
+            <div class="owl-carousel client_owl-carousel">
+                @foreach (var item in Model.Tips)
+                {
+                    <div class="item">
+                        <div class="box">
+                            <div class="detail-box">
+                                <h6>@item.Tips1</h6>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Handle search button click
+    $('#searchButton').on('click', function () {
+        searchRecipes();
+    });
+
+    // Handle input field changes
+    $('#searchInput').on('input', function () {
+        searchRecipes();
+    });
+
+    function searchRecipes() {
+        var searchTerm = $('#searchInput').val().toLowerCase();
+
+        // Loop through recipes and hide/show them based on the search term
+        $('.detail-box h5').each(function () {
+            var recipeTitle = $(this).text().toLowerCase();
+            var recipeBox = $(this).closest('.box');
+
+            if (searchTerm === '' || recipeTitle.includes(searchTerm)) {
+                recipeBox.show();
+            } else {
+                recipeBox.hide();
+            }
+        });
+    }
+</script>
+

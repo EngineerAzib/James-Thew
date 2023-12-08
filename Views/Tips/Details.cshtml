@@ -1,0 +1,62 @@
+﻿@model James_Thew.context.Tips
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Details";
+}
+<style>
+    /* Style for the details container */
+    .details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the headings (Title, Description, Date Posted) */
+    dt {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    /* Style for the displayed data */
+    dd {
+        margin-bottom: 10px;
+    }
+
+    /* Style for action links */
+    .action-links {
+        margin-top: 20px;
+    }
+
+    /* Style for the Back to List link */
+    .back-link {
+        font-size: 16px;
+    }
+</style>
+
+<div class="details-container">
+    <h2>Details</h2>
+
+    <div>
+        <h4>Tips</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Tips1)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tips1)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+    </div>

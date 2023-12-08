@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Anouncement">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Date_Posted" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar(max)" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FAQs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Answer" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DatePosted" Type="datetime" Nullable="false" />
+    <Property Name="Contents" Type="nchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Rating" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profile_Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Racipies_james">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ingredient" Type="nchar" MaxLength="1000" Nullable="false" />
+    <Property Name="CookingProcedure" Type="nchar" MaxLength="1000" Nullable="false" />
+    <Property Name="IsFree" Type="bit" Nullable="false" />
+    <Property Name="Image" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subscription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="SubscriptionType" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="SubscriptionDate" Type="datetime" Nullable="false" />
+    <Property Name="SubscriptionStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tips">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tips" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_recepie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Ingrdient" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CookingProcedure" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Post" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="winnerstable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="User_rec_id" Type="int" Nullable="false" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Feedback_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Profile_Image_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Profile_Image" Type="Self.Profile_Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Profile_Image">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Subscription_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Subscription">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_recepie_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="User_recepie" Type="Self.User_recepie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User_recepie">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_winnerstable_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="winnerstable" Type="Self.winnerstable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="winnerstable">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_winnerstable_User_recepie">
+    <End Role="User_recepie" Type="Self.User_recepie" Multiplicity="1" />
+    <End Role="winnerstable" Type="Self.winnerstable" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User_recepie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="winnerstable">
+        <PropertyRef Name="User_rec_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Anouncement" EntityType="Self.Anouncement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FAQs" EntityType="Self.FAQs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Profile_Image" EntityType="Self.Profile_Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Racipies_james" EntityType="Self.Racipies_james" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tips" EntityType="Self.Tips" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_recepie" EntityType="Self.User_recepie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="winnerstable" EntityType="Self.winnerstable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Feedback_AspNetUsers" Association="Self.FK_Feedback_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Profile_Image_AspNetUsers" Association="Self.FK_Profile_Image_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Profile_Image" EntitySet="Profile_Image" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Subscription_AspNetUsers" Association="Self.FK_Subscription_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Subscription" EntitySet="Subscription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_recepie_AspNetUsers" Association="Self.FK_User_recepie_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="User_recepie" EntitySet="User_recepie" />
+    </AssociationSet>
+    <AssociationSet Name="FK_winnerstable_AspNetUsers" Association="Self.FK_winnerstable_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="winnerstable" EntitySet="winnerstable" />
+    </AssociationSet>
+    <AssociationSet Name="FK_winnerstable_User_recepie" Association="Self.FK_winnerstable_User_recepie">
+      <End Role="User_recepie" EntitySet="User_recepie" />
+      <End Role="winnerstable" EntitySet="winnerstable" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

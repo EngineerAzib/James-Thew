@@ -1,0 +1,118 @@
+﻿@model James_Thew.context.Anouncement
+
+@{
+    ViewBag.Title = "Create Announcement";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; // Assuming you want the same layout as the recipe form
+}
+
+<style>
+    <style >
+    .container {
+        margin-top: 20px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: darkcyan;
+        color: white;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .checkbox label {
+        font-weight: normal;
+    }
+
+    .custom-file-input {
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007BFF;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2>Create Announcement</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal mt-5">
+                        <h4>Announcement</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Date_Posted, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                <input type="text" class="form-control"   name="Date_Posted" value="@DateTime.Now">
+                              
+                                @Html.ValidationMessageFor(model => model.Date_Posted, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create Announcement" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

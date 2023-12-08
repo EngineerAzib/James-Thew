@@ -1,0 +1,87 @@
+﻿@model James_Thew.context.FAQs
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Delete";
+}
+<style>
+    /* Style for the delete container */
+    .delete-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f8f8f8;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Style for the headings (Title, Description, Date Posted) */
+    dt {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    /* Style for the displayed data */
+    dd {
+        margin-bottom: 10px;
+    }
+
+    /* Style for the delete button */
+    .delete-button {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+
+    /* Style for the Back to List link */
+    .back-link {
+        font-size: 16px;
+        text-decoration: none;
+    }
+</style>
+<div class="delete-container">
+
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>FAQs</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Question)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Question)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Answer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Answer)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,117 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "User Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Page</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            width: 100%;
+            padding: 12px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .no-form-msg {
+            font-size: 24px;
+            color: #d9534f;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Additional styles for better form layout */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        @if (Session["IsFormActivated"] != null && (bool)Session["IsFormActivated"])
+        {
+            <h2>User Form</h2>
+            using (Html.BeginForm("Contest", "Contest", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Form content goes here -->
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Title</label>
+                    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter the recipe title" name="Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea2">Ingredients</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" placeholder="Enter the recipe ingredients" name="Ingrdient" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea3">Cooking Procedure</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" placeholder="Enter the cooking procedure" name="CookingProcedure" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea3">Post Tips</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea3" rows="3" placeholder="Enter the cooking procedure" name="Post" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+        }
+        else
+        {
+            <p class="no-form-msg">No form available at the moment.</p>
+        }
+    </div>
+
+   
+</body>
+</html>
+

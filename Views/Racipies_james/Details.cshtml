@@ -1,0 +1,106 @@
+﻿@model James_Thew.context.Racipies_james
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<style>
+    .details-container {
+        background-color: #f8f8f8;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin: 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+        color: #333;
+    }
+
+    h4 {
+        font-size: 20px;
+        color: #555;
+    }
+
+    dl.dl-horizontal {
+        font-size: 16px;
+        color: #444;
+    }
+
+    dt {
+        font-weight: bold;
+    }
+
+    .action-links {
+        margin-top: 20px;
+    }
+
+    .action-link {
+        background-color: #428bca;
+        color: #fff;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+        .action-link:hover {
+            background-color: #31708f;
+        }
+    img {
+        max-width: 70px;
+        max-height: 70px;
+    }
+</style>
+
+<div class="details-container">
+    <h2>Details</h2>
+
+    <div>
+        <h4>Racipies_james</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingredient)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingredient)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CookingProcedure)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CookingProcedure)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsFree)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IsFree)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Image)
+            </dt>
+            <dd>
+                <img src="@Url.Content(Model.Image)" alt="" />
+            </dd>
+        </dl>
+    </div>
+
+    <div class="action-links">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "action-link" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "action-link" })
+    </div>
+</div>

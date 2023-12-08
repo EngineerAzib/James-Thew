@@ -1,0 +1,13 @@
+﻿@model IEnumerable<James_Thew.context.Profile_Image>
+
+<span class="user-icon" id="image-preview">
+    @if (Model != null && Model.Any() && Model.First().Image != null)
+    {
+        <img src="@Url.Content(Model.First().Image)" alt="" id="user-image" />
+    }
+    else
+    {
+        <img src="~/vendors/images/photo1.jpg" alt="" id="user-image" />
+    }
+    
+</span>

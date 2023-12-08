@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3303ca7ed313464aa3085fd9d27b32c4" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AspNetUsers" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Subscription" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Subscription_AspNetUsers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.Racipies_james" Width="1.5" PointX="7.625" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.Anouncement" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="Model.Feedback" Width="1.5" PointX="3" PointY="5" />
+        <AssociationConnector Association="Model.FK_Feedback_AspNetUsers" />
+        <EntityTypeShape EntityType="Model.FAQs" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="Model.User_recepie" Width="1.5" PointX="3" PointY="8" />
+        <AssociationConnector Association="Model.FK_User_recepie_AspNetUsers" />
+        <EntityTypeShape EntityType="Model.winnerstable" Width="1.5" PointX="8.25" PointY="5" />
+        <AssociationConnector Association="Model.FK_winnerstable_AspNetUsers" />
+        <AssociationConnector Association="Model.FK_winnerstable_User_recepie" />
+        <EntityTypeShape EntityType="Model.Tips" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="Model.Profile_Image" Width="1.5" PointX="3" PointY="11.5" />
+        <AssociationConnector Association="Model.FK_Profile_Image_AspNetUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
